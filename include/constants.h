@@ -1,1 +1,1 @@
-const bool verbose = false;
+const bool verbose = true;

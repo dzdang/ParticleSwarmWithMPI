@@ -21,7 +21,6 @@ void distribute_particles(const int num_particles, const int num_proc, const int
   }
 }
 
-
 int main(int argc, char const *argv[])
 {
    int max_iter = 100;

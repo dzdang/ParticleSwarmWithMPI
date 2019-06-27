@@ -39,12 +39,12 @@ void particle::update_velocity(const std::vector<double> &swarm_best, const int 
    }
 }
 
-const std::vector<double> &particle::get_best_position()
+std::vector<double> &particle::get_best_position()
 {
    return best_position;
 }
 
-const std::vector<double> &particle::get_position()
+std::vector<double> &particle::get_position()
 {
    return position;
 }

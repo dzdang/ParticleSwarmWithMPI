@@ -76,22 +76,19 @@ void swarm::set_best_soln(const std::vector<double> &input_best)
 
 void swarm::update_swarm()
 {
-   std::vector<double> part_pos; //var for storing particle position
-
    for(auto it = particle_instance.begin(); it != particle_instance.end(); it++)
    {
       it->update_velocity(best_soln, proc_id);
       it->update_position();
-      part_pos = it->get_position();
 
-      if(cost_function(part_pos, p_cost_func) < cost_function(it->get_best_position(), p_cost_func))
+      if(cost_function(it->get_position(), p_cost_func) < cost_function(it->get_best_position(), p_cost_func))
       {
-         it->set_best_position(part_pos);
+         it->set_best_position(it->get_position());
 
          //this part is the part that needs to be parallelized
-         if(cost_function(part_pos, p_cost_func) < cost_function(best_soln, p_cost_func))
+         if(cost_function(it->get_position(), p_cost_func) < cost_function(best_soln, p_cost_func))
          {
-            best_soln = part_pos;
+            best_soln = it->get_position();
          }
       }
    }

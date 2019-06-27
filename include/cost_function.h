@@ -11,7 +11,7 @@ class cost_func_base
 {
    public:
       cost_func_base() = default;
-      virtual std::vector<double> operator() (std::vector<double> &vec) const = 0; //pure virtual
+      virtual double operator() (std::vector<double> &vec) const = 0; //pure virtual
 };   
 
 class x_sq : public cost_func_base
@@ -20,16 +20,13 @@ class x_sq : public cost_func_base
 
    public:
       x_sq() = default;
-      virtual std::vector<double> operator()(std::vector<double> &vec) const 
+      virtual double operator()(std::vector<double> &vec) const 
       {
-         std::vector<double> res(vec.size());
-         std::transform(vec.begin(), vec.end(), res.begin(), calc_sq);
-
-         return res;
+         return calc_sq(vec[0]);
       }
 };         
 
-inline std::vector<double> cost_function(std::vector<double> &vec, const cost_func_base * const user_cost)
+inline double cost_function(std::vector<double> &vec, const cost_func_base * const user_cost)
 {
    return(*user_cost)(vec);
 }

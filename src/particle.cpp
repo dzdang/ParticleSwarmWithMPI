@@ -28,8 +28,8 @@ void particle::update_velocity(const std::vector<double> &swarm_best, const int 
 {
    double c1 = 2; //make c1&x2 user-defined parametrs later
    double c2 = 3;
-   std::mt19937 generator(proc_id); 
-   std::uniform_real_distribution<double> distribution(0.0,1.0);
+   static std::mt19937 generator(proc_id); 
+   static std::uniform_real_distribution<double> distribution(0.0,1.0);
 
    size_t num_dim = position.size();
    for(int i = 0; i < num_dim; ++i)

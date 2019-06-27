@@ -9,17 +9,11 @@
 
 swarm::swarm(const int input_num_particles, const int input_num_dim, int input_max_iter, 
    cost_func_base *input_ptr, const bounds &input_bnds, const int input_num_proc, const int in_proc_id)
+   : max_iter{input_max_iter}, num_particles{input_num_particles}, ptr_2_cost_func{input_ptr}, 
+   num_dim{input_num_dim}, num_proc{input_num_proc}, proc_id{in_proc_id}, bnds{input_bnds}
 {
-   max_iter = input_max_iter;
-   num_particles = input_num_particles;
    particle_instance.resize(input_num_particles, particle(input_num_dim));
    best_soln.resize(input_num_dim,0.0);
-   // best_soln = input_best_soln;
-   ptr_2_cost_func = input_ptr;       //do we need to destroy this?
-   bnds = input_bnds;
-   num_dim = input_num_dim;
-   num_proc = input_num_proc;
-   proc_id = in_proc_id;
 }
 
 void swarm::init_swarm()

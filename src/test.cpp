@@ -6,6 +6,7 @@ int main()
 {
    std::uniform_real_distribution<double> distribution_vel(0.0,1.0);
 
+   std::cout << "hi" << std::endl;
 
    MPI_Init(NULL,NULL);
 

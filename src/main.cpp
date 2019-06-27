@@ -31,6 +31,8 @@ int main(int argc, char const *argv[])
    std::vector<double> upper_bnds = {10};
    bounds bnds(num_dim, lower_bnds,upper_bnds);
 
+   std::cout << "hi" << std::endl;
+
    MPI_Init(NULL, NULL);
    int num_proc;  //number of processors
    int proc_id;   //processor id

@@ -20,7 +20,7 @@ void particle::set_best_position(const std::vector<double> &input_position)
 
 void particle::update_position()
 {
-   std::transform(position.begin(),position.end(),velocity.begin(),position.begin(),
+   std::transform(position.begin(), position.end(), velocity.begin(), position.begin(),
       std::plus<double>());
 }
 

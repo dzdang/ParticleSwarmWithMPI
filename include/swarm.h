@@ -87,7 +87,7 @@ class swarm
       int proc_id;  //process id
       std::vector<particle> particle_instance;
       std::vector<double> best_soln;
-      cost_func_base *ptr_2_cost_func;
+      cost_func_base *p_cost_func;
       bounds bnds;
 };
 

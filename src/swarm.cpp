@@ -9,7 +9,7 @@
 
 swarm::swarm(const int input_num_particles, const int input_num_dim, int input_max_iter, 
    cost_func_base *input_ptr, const bounds &input_bnds, const int input_num_proc, const int in_proc_id)
-   : max_iter{input_max_iter}, num_particles{input_num_particles}, ptr_2_cost_func{input_ptr}, 
+   : max_iter{input_max_iter}, num_particles{input_num_particles}, p_cost_func{input_ptr}, 
    num_dim{input_num_dim}, num_proc{input_num_proc}, proc_id{in_proc_id}, bnds{input_bnds}
 {
    particle_instance.resize(input_num_particles, particle(input_num_dim));
@@ -48,7 +48,7 @@ void swarm::init_swarm()
 
       //check if particle's current position gives a smaller objective than 
       //the swarm's current best position
-      if(cost_function(rand_pos,ptr_2_cost_func) < cost_function(best_soln,ptr_2_cost_func)) 
+      if(cost_function(rand_pos, p_cost_func) < cost_function(best_soln, p_cost_func)) 
       {
          set_best_soln(rand_pos);
       }
@@ -84,12 +84,12 @@ void swarm::update_swarm()
       it->update_position();
       part_pos = it->get_position();
 
-      if(cost_function(part_pos, ptr_2_cost_func) < cost_function(it->get_best_position(), ptr_2_cost_func))
+      if(cost_function(part_pos, p_cost_func) < cost_function(it->get_best_position(), p_cost_func))
       {
          it->set_best_position(part_pos);
 
          //this part is the part that needs to be parallelized
-         if(cost_function(part_pos, ptr_2_cost_func) < cost_function(best_soln, ptr_2_cost_func))
+         if(cost_function(part_pos, p_cost_func) < cost_function(best_soln, p_cost_func))
          {
             best_soln = part_pos;
          }
@@ -190,7 +190,7 @@ void swarm::find_and_exchange_global_best_soln()
          // std::cout << "proc 1: " << local_best_soln[0] << std::endl;
          // std::cout << "proc 0: " << best_soln[0] << std::endl;
 
-         if(cost_function(local_best_soln, ptr_2_cost_func) < cost_function(best_soln, ptr_2_cost_func))
+         if(cost_function(local_best_soln, p_cost_func) < cost_function(best_soln, p_cost_func))
          {
             best_soln = local_best_soln;
          }         

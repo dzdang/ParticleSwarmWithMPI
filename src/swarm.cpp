@@ -61,9 +61,6 @@ void swarm::init_swarm()
       it->set_velocity(rand_vel);
    }
 
-   // std::cout << proc_id << " | " << best_soln[0] << std::endl;
-
-
    find_and_exchange_global_best_soln();
 
    if(verbose)
@@ -87,8 +84,6 @@ void swarm::update_swarm()
       it->update_position();
       part_pos = it->get_position();
 
-      // std::cout << proc_id << " | part positoin: " << std::setprecision(16) << part_pos[0] << std::endl;
-
       if(cost_function(part_pos, ptr_2_cost_func) < cost_function(it->get_best_position(), ptr_2_cost_func))
       {
          it->set_best_position(part_pos);
@@ -101,11 +96,6 @@ void swarm::update_swarm()
       }
    }
 
-
-
-   // std::cout << proc_id << " |  " << std::setprecision(16) << best_soln[0] << std::endl;
-
-
    find_and_exchange_global_best_soln();
 }
 
@@ -115,7 +105,6 @@ void swarm::iterate()
 
    //iterate until max_iter is reached or until some other convergence criteria is reached;
    //latter is not yet implemented
-
    while(iter < max_iter)
    {
       if(verbose && proc_id == 0)
